@@ -6,6 +6,7 @@ import javax.persistence.Table;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "books")
@@ -21,7 +22,7 @@ public class Book {
     private Integer price;
     private Author author;
     private Publisher publisher;
-    private Genre genre;
+    private List<Genre> genre;
 
     public Book() {}
 
@@ -89,11 +90,11 @@ public class Book {
         this.publisher = publisher;
     }
 
-    public Genre getGenre() {
+    public List<Genre> getGenre() {
         return genre;
     }
 
-    public void setGenre(Genre genre) {
+    public void setGenre(List<Genre> genre) {
         this.genre = genre;
     }
 }
