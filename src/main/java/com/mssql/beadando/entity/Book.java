@@ -2,6 +2,10 @@ package com.mssql.beadando.entity;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -20,8 +24,14 @@ public class Book {
     private Integer edition;
     private Integer availableQuantity;
     private Integer price;
+
+    @ManyToOne
     private Author author;
+
+    @ManyToOne
     private Publisher publisher;
+
+    @ManyToMany
     private List<Genre> genre;
 
     public Book() {}

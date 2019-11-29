@@ -15,7 +15,6 @@ public class Author {
     private Long id;
     private String firstName;
     private String lastName;
-    private String companyName;
 
     public Author() {}
 
@@ -43,11 +42,4 @@ public class Author {
         this.lastName = lastName;
     }
 
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
 }

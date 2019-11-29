@@ -1,0 +1,11 @@
+version: '3.7'
+services:
+ SQLServer:
+  image: microsoft/mssql-server-linux
+  environment:
+    - ACCEPT_EULA=Y
+    - SA_PASSWORD=Password_01 
+  ports:
+    - '1433:1433'
+  volumes:
+    - C:\DockerLinux\Volumes\SQLServer:/var/opt/mssql
