@@ -24,13 +24,13 @@ public class Book {
     private Integer availableQuantity;
     private Integer price;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
     private Author author;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
     private Publisher publisher;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
     private List<Genre> genre;
 
     public Book() {
