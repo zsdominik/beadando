@@ -1,5 +1,6 @@
 package com.mssql.beadando.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,13 +24,13 @@ public class Book {
     private Integer availableQuantity;
     private Integer price;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Author author;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Publisher publisher;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Genre> genre;
 
     public Book() {
