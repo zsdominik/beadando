@@ -1,10 +1,10 @@
 package com.mssql.beadando.entity;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Table;
-import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "reviewers")
@@ -15,7 +15,8 @@ public class Reviewer {
     private Long id;
     private String username;
 
-    public Reviewer() {}
+    public Reviewer() {
+    }
 
     public Long getId() {
         return id;

@@ -16,7 +16,8 @@ public class Author {
     private String firstName;
     private String lastName;
 
-    public Author() {}
+    public Author() {
+    }
 
     public Long getId() {
         return id;

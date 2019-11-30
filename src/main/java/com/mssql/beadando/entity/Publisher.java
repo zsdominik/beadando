@@ -1,11 +1,11 @@
 package com.mssql.beadando.entity;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.Entity;
-import javax.persistence.Id;
 import java.util.List;
 
 @Entity
@@ -20,7 +20,8 @@ public class Publisher {
     @ManyToMany
     private List<Book> publishedBooks;
 
-    public Publisher() {}
+    public Publisher() {
+    }
 
     public Long getId() {
         return id;
