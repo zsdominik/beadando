@@ -1,6 +1,9 @@
 package com.mssql.beadando.entity;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -16,12 +22,26 @@ import java.util.List;
 public class Book {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "seq")
+    @GenericGenerator(name = "seq", strategy = "increment")
+    @Column(updatable = false)
     private Long id;
+
+    @Column(nullable = false, length = 150)
+    @NotNull(message = "Title cannot be null")
     private String title;
+
+    @Column(nullable = false)
+    @NotNull(message = "Publication date cannot be null")
     private LocalDateTime publicationDate;
+
+    @Column(nullable = false, length = 1)
+    @NotNull(message = "Edition date cannot be null")
+    @Size(max = 1, message = "Edition cannot be more than 1 character")
     private Integer edition;
+
     private Integer availableQuantity;
+
     private Integer price;
 
     @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })

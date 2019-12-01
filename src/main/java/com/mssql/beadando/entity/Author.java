@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "authors")
@@ -16,9 +18,17 @@ public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "seq")
     @GenericGenerator(name = "seq", strategy = "increment")
-    @Column(nullable = false)
+    @Column(nullable = false, updatable = false)
     private Long id;
+
+    @NotNull(message = "First name cannot be null")
+    @Column(length = 100)
+    @Size(max = 100, message = "First name cannot be more than 100 character")
     private String firstName;
+
+    @NotNull(message = "Last name cannot be null")
+    @Column(length = 100)
+    @Size(max = 100, message = "Last name cannot be more than 100 character")
     private String lastName;
 
     public Author() {
