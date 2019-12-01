@@ -1,19 +1,23 @@
 package com.mssql.beadando.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -35,22 +39,30 @@ public class Book {
     @NotNull(message = "Publication date cannot be null")
     private LocalDateTime publicationDate;
 
-    @Column(nullable = false, length = 1)
+    @Column(nullable = false)
     @NotNull(message = "Edition date cannot be null")
-    @Size(max = 1, message = "Edition cannot be more than 1 character")
     private Integer edition;
 
     private Integer availableQuantity;
 
     private Integer price;
 
-    @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
+    @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, fetch = FetchType.LAZY)
+    @JoinColumn(name = "author_id", referencedColumnName = "id")
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
+    @JsonBackReference
     private Author author;
 
-    @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
+    @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, fetch = FetchType.LAZY)
+    @JoinColumn(name = "publisher_id", referencedColumnName = "id")
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
+    @JsonBackReference
     private Publisher publisher;
 
-    @ManyToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
+    @ManyToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, fetch = FetchType.LAZY)
+    @JoinColumn(name = "genre_id", referencedColumnName = "id")
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
+    @JsonBackReference
     private List<Genre> genre;
 
     public Book() {
